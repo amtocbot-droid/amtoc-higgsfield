@@ -1,0 +1,12 @@
+**/bin/
+**/obj/
+**/node_modules/
+**/.angular/
+**/dist/
+src/client/.nx/
+.git/
+.github/
+*.md
+docs/
+# docker/ needed by Dockerfile.client for nginx.conf
+# *.slnx needed by Dockerfile.api for dotnet restore

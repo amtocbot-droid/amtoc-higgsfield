@@ -1,0 +1,27 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+
+COPY ["src/server/HiggsfieldTutorial.WebAPI/HiggsfieldTutorial.WebAPI.csproj", "HiggsfieldTutorial.WebAPI/"]
+COPY ["src/server/HiggsfieldTutorial.Application/HiggsfieldTutorial.Application.csproj", "HiggsfieldTutorial.Application/"]
+COPY ["src/server/HiggsfieldTutorial.Infrastructure/HiggsfieldTutorial.Infrastructure.csproj", "HiggsfieldTutorial.Infrastructure/"]
+COPY ["src/server/HiggsfieldTutorial.Domain/HiggsfieldTutorial.Domain.csproj", "HiggsfieldTutorial.Domain/"]
+COPY ["HiggsfieldTutorial.slnx", "."]
+
+RUN dotnet restore HiggsfieldTutorial.WebAPI/HiggsfieldTutorial.WebAPI.csproj
+
+COPY src/server/ .
+RUN dotnet publish HiggsfieldTutorial.WebAPI/HiggsfieldTutorial.WebAPI.csproj -c Release -o /app/publish
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgssapi-krb5-2 \
+    libkrb5-3 \
+    libssl3 \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build /app/publish .
+
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "HiggsfieldTutorial.WebAPI.dll"]

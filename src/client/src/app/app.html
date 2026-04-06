@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="nav-brand">
+    <a routerLink="/">Higgsfield Tutorial</a>
+  </div>
+  <ul class="nav-links">
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+    <li><a routerLink="/tutorials" routerLinkActive="active">Tutorials</a></li>
+    <li><a routerLink="/generate" routerLinkActive="active">Playground</a></li>
+    <li><a routerLink="/automate" routerLinkActive="active">Automate</a></li>
+    <li><a routerLink="/prompts" routerLinkActive="active">Prompt Library</a></li>
+    <li><a routerLink="/api-reference" routerLinkActive="active">API Reference</a></li>
+  </ul>
+</nav>
+
+<main class="main-content">
+  <router-outlet />
+</main>

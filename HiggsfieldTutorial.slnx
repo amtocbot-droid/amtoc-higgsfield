@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/server/">
+    <Project Path="src/server/HiggsfieldTutorial.Application/HiggsfieldTutorial.Application.csproj" />
+    <Project Path="src/server/HiggsfieldTutorial.Domain/HiggsfieldTutorial.Domain.csproj" />
+    <Project Path="src/server/HiggsfieldTutorial.Infrastructure/HiggsfieldTutorial.Infrastructure.csproj" />
+    <Project Path="src/server/HiggsfieldTutorial.WebAPI/HiggsfieldTutorial.WebAPI.csproj" />
+  </Folder>
+</Solution>
