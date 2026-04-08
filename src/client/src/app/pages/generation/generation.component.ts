@@ -68,10 +68,13 @@ import { ApiService, ModelInfo, GenerationJob } from '../../services/api.service
               <label>Resolution</label>
               <select [ngModel]="resolution()" (ngModelChange)="resolution.set($event)">
                 <option value="">Default</option>
-                <option value="512">512px</option>
-                <option value="768">768px</option>
-                <option value="1024">1024px</option>
-                <option value="2048">2048px</option>
+                @if (mediaType() === 'image') {
+                  <option value="2K">2K</option>
+                  <option value="4K">4K</option>
+                } @else {
+                  <option value="720p">720p</option>
+                  <option value="1080p">1080p</option>
+                }
               </select>
             </div>
             <div class="form-group">
@@ -219,6 +222,7 @@ export class GenerationComponent implements OnInit, OnDestroy {
 
   onModelChange(modelId: string): void {
     this.selectedModelId.set(modelId);
+    this.resolution.set('');
     const model = this.models().find((m) => m.modelId === modelId);
     if (model) this.mediaType.set(model.mediaType);
   }
